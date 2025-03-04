@@ -134,24 +134,33 @@ class RubyText extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Text.rich(
         TextSpan(
-          children: data
-              .map<InlineSpan>(
-                (RubyTextData data) => WidgetSpan(
-                  child: RubySpanWidget(
-                    data.copyWith(
-                      style: style,
-                      rubyStyle: rubyStyle,
-                      textDirection: textDirection,
-                    ),
-                  ),
-                ),
-              )
-              .toList(),
+          children: data.map<InlineSpan>(
+            (RubyTextData data) {
+              return TextSpan(
+                text: (data.ruby == null || data.ruby == "") ? data.text : '',
+                style: style,
+                children: data.ruby != null && data.ruby!.isNotEmpty
+                    ? [
+                        WidgetSpan(
+                          child: RubySpanWidget(
+                            data.copyWith(
+                              text: data.text,
+                              style: style,
+                              rubyStyle: rubyStyle,
+                              textDirection: textDirection,
+                            ),
+                          ),
+                        ),
+                      ]
+                    : [],
+              );
+            },
+          ).toList(),
         ),
         textAlign: textAlign,
         textDirection: textDirection,
-        softWrap: softWrap,
-        overflow: overflow,
+        softWrap: softWrap ?? true,
+        overflow: overflow ?? TextOverflow.visible,
         maxLines: maxLines,
       );
 }
