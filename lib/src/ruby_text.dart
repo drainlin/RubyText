@@ -137,8 +137,8 @@ class RubyText extends StatelessWidget {
           children: data.map<InlineSpan>(
             (RubyTextData data) {
               return TextSpan(
-                text: (data.ruby == null || data.ruby == "") ? data.text : '',
-                style: style,
+                text: (data.ruby == null || data.ruby == '') ? data.text : '',
+                style: data.style,
                 children: data.ruby != null && data.ruby!.isNotEmpty
                     ? [
                         WidgetSpan(
