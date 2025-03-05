@@ -145,7 +145,7 @@ class RubyText extends StatelessWidget {
                           child: RubySpanWidget(
                             data.copyWith(
                               text: data.text,
-                              style: style,
+                              style: data.style,
                               rubyStyle: rubyStyle,
                               textDirection: textDirection,
                             ),
